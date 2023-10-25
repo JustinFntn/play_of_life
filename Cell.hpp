@@ -12,9 +12,16 @@ private:
 public:
     Cell();
     ~Cell();
+
     bool getState() const;
     int getNbNeighbour() const;
-    friend std::ostream &operator<<(std::ostream &os, Cell &c);
+
+    void setState(bool state);
+    void setNbNeighbour(int nb_neighbour);
+
+    void updateState();
+
+    friend std::ostream& operator<<(std::ostream& os, Cell& c);
 };
 
 #endif
