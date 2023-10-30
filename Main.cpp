@@ -1,10 +1,12 @@
 #include <iostream>
 #include <string>
+#include <unistd.h>
 #include "Plateau.hpp"
 #include "Cell.hpp"
 
 int main(int argc, char const* argv[])
 {
+    // Création du plateau
     int column, line;
     do {
         std::cout << "Quelle taille de plateau souhaitez-vous ? (ex: 3 3)" << std::endl;
@@ -27,9 +29,27 @@ int main(int argc, char const* argv[])
     Plateau p(column, line, t);
     std::cout << p << std::endl;
 
-    std::cout << "taille :" << p.getSize()[0] << " x " << p.getSize()[1] << std::endl;
+    // Initialisation du plateau
+    std::cout << "Vous allez maintenant initialiser le plateau en indiquant les cellules vivantes (saisir \"stop\" lorsque vous voulez finir l'initialisation)" << std::endl;
+    std::string coordonnées;
+    do {
+        std::cout << "Coordonnées de la cellule à modifier ? (ex: 1 1)" << std::endl;
+        std::cin >> coordonnées;
+        if (coordonnées != "stop") {
+            int x = std::stoi(coordonnées.substr(0, coordonnées.find(' ')));
+            int y = std::stoi(coordonnées.substr(coordonnées.find(' ') + 1));
+            std::cout << "Vous avez choisi la cellule " << x << " " << y << std::endl;
+            p.setCellState(x, y, true);
+        }
+        std::cout << p << std::endl;
+    } while (coordonnées != "stop");
 
-    p.setNeighbour(0, 0);
-    int nbvoisin = p.getBoard()[0][0].getNbNeighbour();
-    std::cout << nbvoisin << std::endl;
+    for (int i = 1; i < 11; i++) {
+        sleep(3);
+        std::cout << "Génération " << i + 1 << std::endl;
+        p.updateBoard();
+        std::cout << p << std::endl;
+    }
+
+    p.state();
 }

@@ -22,7 +22,11 @@ public:
     void setNeighbour(int i, int j);
     int* getSize() const;
 
+    void setCellState(int i, int j, bool state);
+
     void updateBoard();
+
+    void state();
 
     friend std::ostream& operator<<(std::ostream& os, Plateau& p);
 };
