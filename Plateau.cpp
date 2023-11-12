@@ -70,9 +70,12 @@ int* Plateau::getSize() const
     return size;
 }
 
-void Plateau::setCellState(int i, int j, bool state)
+void Plateau::setCellState(int i, int j)
 {
-    this->board[i][j].setState(state);
+    if (i < this->board.size() && j < this->board[0].size())
+        this->board[i][j].setState(!this->board[i][j].getState());
+    else
+        std::cout << "Coordonnées invalides" << std::endl;
 }
 
 void Plateau::updateBoard() {

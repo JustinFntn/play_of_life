@@ -22,7 +22,7 @@ public:
     void setNeighbour(int i, int j);
     int* getSize() const;
 
-    void setCellState(int i, int j, bool state);
+    void setCellState(int i, int j);
 
     void updateBoard();
 
